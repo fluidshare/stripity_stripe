@@ -4,7 +4,7 @@ defmodule Stripe.Util do
   @doc """
   Performs a root-level conversion of map keys from strings to atoms.
 
-  This function performs the transformation safely using `String.to_existing_atom/1`, but this has a possibility to raise if
+  This function performs the transformation safely using `String.to_atom/1`, but this has a possibility to raise if
   there is not a corresponding atom.
 
   It is recommended that you pre-filter maps for known values before
@@ -31,7 +31,7 @@ defmodule Stripe.Util do
   def map_keys_to_atoms(m) do
     Enum.into(m, %{}, fn
       {k, v} when is_binary(k) ->
-        a = String.to_existing_atom(k)
+        a = String.to_atom(k)
         {a, v}
 
       entry ->
